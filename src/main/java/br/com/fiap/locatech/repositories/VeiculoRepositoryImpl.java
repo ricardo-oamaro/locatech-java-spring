@@ -46,14 +46,8 @@ public class VeiculoRepositoryImpl implements VeiculoRepository{
     @Override
     public Integer update(Veiculo veiculo, Long id) {
         return this.jdbcClient
-                .sql("UPDATE veiculos SET marca = :marca, modelo = :modelo, placa = :placa, ano = :ano, cor = :cor, valor_diaria = :valorDiaria WHERE id = :id")
-                .params("marca", veiculo.getMarca())
-                .params("modelo", veiculo.getModelo())
-                .params("placa", veiculo.getPlaca())
-                .params("ano", veiculo.getAno())
-                .params("cor", veiculo.getCor())
-                .params("valorDiaria", veiculo.getValorDiaria())
-                .params("id", id)
+                .sql("UPDATE veiculos SET marca = ?, modelo = ?, placa = ?, ano = ?, cor = ?, valor_diaria = ? WHERE id = ?")
+                .params(veiculo.getMarca(), veiculo.getModelo(), veiculo.getPlaca(), veiculo.getAno(), veiculo.getCor(), veiculo.getValorDiaria(), id)
                 .update();
     }
 

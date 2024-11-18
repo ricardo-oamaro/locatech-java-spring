@@ -56,7 +56,7 @@ public class PessoaController {
             @RequestBody Pessoa pessoa
     ){
         logger.info("PUT -> /pessoa" + id);
-        this.pessoaService.update(pessoa, id);
+        this.pessoaService.updatePessoa(pessoa, id);
         return ResponseEntity.noContent().build();
     }
 
@@ -65,7 +65,7 @@ public class PessoaController {
             @PathVariable("id") Long id
     ){
         logger.info("DELETE -> /pessoa" + id);
-        this.pessoaService.delete(id);
-        return ResponseEntity.noContent().build();
+        this.pessoaService.deletePessoa(id);
+        return ResponseEntity.ok().build();
     }
 }

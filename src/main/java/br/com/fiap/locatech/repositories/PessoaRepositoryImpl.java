@@ -38,23 +38,16 @@ public class PessoaRepositoryImpl implements PessoaRepository{
     @Override
     public Integer save(Pessoa pessoa) {
         return this.jdbcClient
-                .sql("INSERT INTO pessoas (nome, cpf, email, telefone) VALUES (:nome, :cpf, :email, :telefone)")
-                .params("nome", pessoa.getNome())
-                .params("cpf", pessoa.getCpf())
-                .params("email", pessoa.getEmail())
-                .params("telefone", pessoa.getTelefone())
+                .sql("INSERT INTO pessoas (nome, cpf, email, telefone) VALUES (?, ?, ?, ?)")
+                .params(pessoa.getNome(), pessoa.getCpf(), pessoa.getEmail(), pessoa.getTelefone())
                 .update();
     }
 
     @Override
     public Integer update(Pessoa pessoa, Long id) {
         return this.jdbcClient
-                .sql("UPDATE pessoas SET nome = :nome, cpf = :cpf, email = :email, telefone = :telefone WHERE id = :id")
-                .params("nome", pessoa.getNome())
-                .params("cpf", pessoa.getCpf())
-                .params("email", pessoa.getEmail())
-                .params("telefone", pessoa.getTelefone())
-                .params("id", id)
+                .sql("UPDATE pessoas SET nome = ?, cpf = ?, email = ?, telefone = ? WHERE id = ?")
+                .params(pessoa.getNome(), pessoa.getCpf(), pessoa.getEmail(), pessoa.getTelefone(), id)
                 .update();
     }
 

@@ -17,20 +17,20 @@ public class PessoaService {
     }
 
     public void save(Pessoa pessoa) {
-        this.pessoaRepository.save(pessoa);
-        Assert.state(this.pessoaRepository.save(pessoa) == 1, "Erro ao salvar pessoa");
+        var save = this.pessoaRepository.save(pessoa);
+        Assert.state(save == 1, "Erro ao salvar pessoa");
     }
 
-    public void update(Pessoa pessoa, Long id) {
-        this.pessoaRepository.update(pessoa, id);
-        if (this.pessoaRepository.update(pessoa, id) == 0) {
+    public void updatePessoa(Pessoa pessoa, Long id) {
+        var update = this.pessoaRepository.update(pessoa, id);
+        if (update == 0) {
             throw new RuntimeException("Erro ao atualizar pessoa");
         }
     }
 
-    public void delete(Long id) {
-        this.pessoaRepository.delete(id);
-        if (this.pessoaRepository.delete(id) == 0) {
+    public void deletePessoa(Long id) {
+        var delete = this.pessoaRepository.delete(id);
+        if (delete== 0) {
             throw new RuntimeException("Erro ao deletar pessoa");
         }
     }

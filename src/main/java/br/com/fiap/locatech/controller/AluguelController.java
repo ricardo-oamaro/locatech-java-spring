@@ -1,6 +1,8 @@
 package br.com.fiap.locatech.controller;
 
+import br.com.fiap.locatech.dto.AluguelRequestDTO;
 import br.com.fiap.locatech.entities.Aluguel;
+import br.com.fiap.locatech.repositories.VeiculoRepository;
 import br.com.fiap.locatech.services.AluguelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +44,7 @@ public class AluguelController {
 
     @PostMapping
     public ResponseEntity<Void> saveAluguel(
-            @RequestBody Aluguel aluguel
+            @RequestBody AluguelRequestDTO aluguel
     ){
         logger.info("POST -> /aluguel");
         this.aluguelService.save(aluguel);
@@ -67,4 +69,5 @@ public class AluguelController {
         this.aluguelService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
 }
