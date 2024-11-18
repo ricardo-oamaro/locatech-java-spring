@@ -38,13 +38,8 @@ public class VeiculoRepositoryImpl implements VeiculoRepository{
     @Override
     public Integer save(Veiculo veiculo) {
         return this.jdbcClient
-                .sql("INSERT INTO veiculos (marca, modelo, placa, ano, cor, valor_diaria) VALUES (:marca, :modelo, :placa, :ano, :cor, :valorDiaria)")
-                .params("marca", veiculo.getMarca())
-                .params("modelo", veiculo.getModelo())
-                .params("placa", veiculo.getPlaca())
-                .params("ano", veiculo.getAno())
-                .params("cor", veiculo.getCor())
-                .params("valorDiaria", veiculo.getValorDiaria())
+                .sql("INSERT INTO veiculos (marca, modelo, placa, ano, cor, valor_diaria) VALUES (?, ?, ?, ?, ?, ?)")
+                .params(veiculo.getMarca(), veiculo.getModelo(), veiculo.getPlaca(), veiculo.getAno(), veiculo.getCor(), veiculo.getValorDiaria())
                 .update();
     }
 
