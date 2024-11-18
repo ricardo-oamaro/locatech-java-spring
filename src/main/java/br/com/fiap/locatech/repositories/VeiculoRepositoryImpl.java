@@ -19,7 +19,7 @@ public class VeiculoRepositoryImpl implements VeiculoRepository{
 
     @Override
     public Optional<Veiculo> findById(Long id) {
-        return this.jdbcClient.sql("SELECT * FROM veiculo WHERE id = :id")
+        return this.jdbcClient.sql("SELECT * FROM veiculos WHERE id = :id")
                 .param("id", id)
                 .query(Veiculo.class)
                 .optional();
@@ -28,7 +28,7 @@ public class VeiculoRepositoryImpl implements VeiculoRepository{
     @Override
     public List<Veiculo> findAll(int size, int offset) {
         return this.jdbcClient
-                .sql("SELECT * FROM veiculo LIMIT :size OFFSET :offset")
+                .sql("SELECT * FROM veiculos LIMIT :size OFFSET :offset")
                 .param("size", size)
                 .param("offset", offset)
                 .query(Veiculo.class)
@@ -38,7 +38,7 @@ public class VeiculoRepositoryImpl implements VeiculoRepository{
     @Override
     public Integer save(Veiculo veiculo) {
         return this.jdbcClient
-                .sql("INSERT INTO veiculo (marca, modelo, placa, ano, cor, valor_diaria) VALUES (:marca, :modelo, :placa, :ano, :cor, :valorDiaria)")
+                .sql("INSERT INTO veiculos (marca, modelo, placa, ano, cor, valor_diaria) VALUES (:marca, :modelo, :placa, :ano, :cor, :valorDiaria)")
                 .params("marca", veiculo.getMarca())
                 .params("modelo", veiculo.getModelo())
                 .params("placa", veiculo.getPlaca())
@@ -51,7 +51,7 @@ public class VeiculoRepositoryImpl implements VeiculoRepository{
     @Override
     public Integer update(Veiculo veiculo, Long id) {
         return this.jdbcClient
-                .sql("UPDATE veiculo SET marca = :marca, modelo = :modelo, placa = :placa, ano = :ano, cor = :cor, valor_diaria = :valorDiaria WHERE id = :id")
+                .sql("UPDATE veiculos SET marca = :marca, modelo = :modelo, placa = :placa, ano = :ano, cor = :cor, valor_diaria = :valorDiaria WHERE id = :id")
                 .params("marca", veiculo.getMarca())
                 .params("modelo", veiculo.getModelo())
                 .params("placa", veiculo.getPlaca())
@@ -65,7 +65,7 @@ public class VeiculoRepositoryImpl implements VeiculoRepository{
     @Override
     public Integer delete(Long id) {
         return this.jdbcClient
-                .sql("DELETE FROM veiculo WHERE id = :id")
+                .sql("DELETE FROM veiculos WHERE id = :id")
                 .param("id", id)
                 .update();
     }
