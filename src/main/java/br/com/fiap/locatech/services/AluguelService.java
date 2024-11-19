@@ -4,11 +4,13 @@ import br.com.fiap.locatech.dto.AluguelRequestDTO;
 import br.com.fiap.locatech.entities.Aluguel;
 import br.com.fiap.locatech.repositories.AluguelRepository;
 import br.com.fiap.locatech.repositories.VeiculoRepository;
+import br.com.fiap.locatech.services.exceptions.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AluguelService {
@@ -27,8 +29,9 @@ public class AluguelService {
         return this.aluguelRepository.findAll(size, offset);
     }
 
-    public Aluguel findAluguelById(Long id) {
-        return this.aluguelRepository.findById(id).orElse(null);
+    public Optional<Aluguel> findAluguelById(Long id) {
+        return Optional.ofNullable(this.aluguelRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Aluguel não encontrado")));
     }
 
     public void save(AluguelRequestDTO aluguel) {

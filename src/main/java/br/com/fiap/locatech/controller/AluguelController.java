@@ -2,14 +2,15 @@ package br.com.fiap.locatech.controller;
 
 import br.com.fiap.locatech.dto.AluguelRequestDTO;
 import br.com.fiap.locatech.entities.Aluguel;
-import br.com.fiap.locatech.repositories.VeiculoRepository;
 import br.com.fiap.locatech.services.AluguelService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/alugueis")
@@ -34,7 +35,7 @@ public class AluguelController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Aluguel> findAluguelById(
+    public ResponseEntity<Optional<Aluguel>> findAluguelById(
             @RequestParam("id") Long id
     ){
         logger.info("/alugueis" + id);
@@ -44,7 +45,7 @@ public class AluguelController {
 
     @PostMapping
     public ResponseEntity<Void> saveAluguel(
-            @RequestBody AluguelRequestDTO aluguel
+           @Valid @RequestBody AluguelRequestDTO aluguel
     ){
         logger.info("POST -> /aluguel");
         this.aluguelService.save(aluguel);
